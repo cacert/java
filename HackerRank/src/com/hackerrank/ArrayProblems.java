@@ -1,10 +1,34 @@
 package com.hackerrank;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ArrayProblems {
 
 
+	/**
+	 * finds and returns how many two numbers sum up to input number
+	 * @param arr
+	 * @param num
+	 * @return
+	 */
+	private int pairSum(int arr[] , int num) {
+		if (arr.length==0)
+			return 0;
+		Map<Integer,Integer> complement = new HashMap<>();
+		int count = 0;
+		for(int i : arr){
+			if(complement.containsKey(num-i)){
+				complement.merge(num-i, -1, Integer::sum);
+				count++;
+			}
+			else
+				complement.merge(i, 1, Integer::sum);
+		}
+		return count;
+	}
+	
 	private void computeSum(int[] arr){
 		int sum= 0;
 		for(int i = 0; i< arr.length; i ++){
@@ -14,7 +38,7 @@ public class ArrayProblems {
 	}
 	
 	public static void main(String[] args) {
-		new ArrayProblems().test();
+		System.err.println(new ArrayProblems().pairSum(new int []{1,2,2,1},4));
 	}
 
 	private void test() {
