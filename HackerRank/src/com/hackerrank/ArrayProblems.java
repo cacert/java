@@ -29,6 +29,28 @@ public class ArrayProblems {
 		return count;
 	}
 	
+	/**
+	 * find and return missing element in arr2
+	 * @param arr1
+	 * @param arr2
+	 * @return
+	 */
+	private int findMissingElement(int[] arr1, int[] arr2){
+		
+		Map<Integer, Integer> counts = new HashMap<>();
+		for(int i : arr1){
+			counts.merge(i, 1, Integer::sum);
+		}
+		for(int i : arr2){
+			counts.merge(i, -1, Integer::sum);
+		}
+		for(int i : counts.keySet()){
+			if(counts.get(i)!=0)
+				return i;
+		}
+		return -1;
+	}
+	
 	private void computeSum(int[] arr){
 		int sum= 0;
 		for(int i = 0; i< arr.length; i ++){
@@ -38,7 +60,7 @@ public class ArrayProblems {
 	}
 	
 	public static void main(String[] args) {
-		System.err.println(new ArrayProblems().pairSum(new int []{1,2,2,1},4));
+		System.err.println(new ArrayProblems().findMissingElement(new int[]{1,2,3,4}, new int[]{1,2,4} ));
 	}
 
 	private void test() {
