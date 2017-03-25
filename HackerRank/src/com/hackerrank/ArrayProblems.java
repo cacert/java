@@ -61,8 +61,23 @@ public class ArrayProblems {
 	
 	public static void main(String[] args) {
 		System.err.println(new ArrayProblems().findMissingElement(new int[]{1,2,3,4}, new int[]{1,2,4} ));
+		System.err.println(new ArrayProblems().largestContinuousSum(
+				new int[]{-1,-2,-3,11,-10,12,2}));
 	}
 
+	private int  largestContinuousSum(int arr[]) {
+		if(arr.length == 0){
+			return -1;
+		}
+		int currentSum = 0;
+		int maxSum = 0;
+		
+		for(int i : arr){
+			currentSum = Math.max(currentSum+i, i);
+			maxSum = Math.max(maxSum, currentSum);
+		}
+		return maxSum;
+	}
 	private void test() {
 		computeSum(new int[]{1,2,3});
 		findMinIndex(new int[]{11,55,22,5,4,777,1});
