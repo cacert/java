@@ -63,6 +63,8 @@ public class ArrayProblems {
 		System.err.println(new ArrayProblems().findMissingElement(new int[]{1,2,3,4}, new int[]{1,2,4} ));
 		System.err.println(new ArrayProblems().largestContinuousSum(
 				new int[]{-1,-2,-3,11,-10,12,2}));
+		System.err.println(
+				new ArrayProblems().findLargestRectangularArea(new int[]{2,3,10,0,1}));
 	}
 
 	private int  largestContinuousSum(int arr[]) {
@@ -196,6 +198,22 @@ public class ArrayProblems {
 				return i;
 		}
 		return -1;
+	}
+	
+	private int findLargestRectangularArea(int arr[]){
+		if(arr.length == 0)
+			return 0;
+		int maxArea = 0;
+		int localArea = 0;
+		for(int i = 0 ; i< arr.length ; i++){
+			int currentMin = arr[i];
+			for (int j = i+1; j < arr.length ; j++){
+				currentMin=Math.min(arr[j], currentMin);
+				localArea = (j-i+1) * currentMin;
+				maxArea=Math.max(localArea, maxArea);
+			}
+		}
+		return maxArea;
 	}
 	
 	enum MySingleton{
