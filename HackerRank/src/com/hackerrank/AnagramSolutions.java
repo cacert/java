@@ -1,7 +1,10 @@
 package com.hackerrank;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 public class AnagramSolutions {
 	/**
@@ -36,7 +39,39 @@ public class AnagramSolutions {
 		}
 		return true;
 	}
+	
+	private String sentenceReversalWithTrim(String input){
+		if(input == null)
+			return null;
+		
+		Stack<String> words = new Stack<>();
+		StringBuffer sb = new StringBuffer();
+		int length = input.length();
+		
+		for(int i = 0 ; i< length ; i++){
+			while(i < length && input.charAt(i) == ' ' ){
+				if(sb.length() > 0){
+					words.push(sb.toString());
+					sb.setLength(0);
+				}
+				i++;
+			} 
+			if(i < length){
+				sb.append(input.charAt(i));
+			}
+		}
+		if(sb.length()>0){
+			words.push(sb.toString());
+			sb.setLength(0);
+		}
+		while(!words.isEmpty()){
+			sb.append(words.pop());
+			sb.append(' ');
+		}
+		return sb.toString();
+	} 
 	public static void main(String[] args) {
 		System.err.println(new AnagramSolutions().anagram("ahmet", "tehma"));
+		System.err.println(new AnagramSolutions().sentenceReversalWithTrim("   ahmet naptin    "));
 	}
 }

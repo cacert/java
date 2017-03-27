@@ -215,6 +215,7 @@ public class ArrayProblems {
 		}
 		return maxArea;
 	}
+
 	
 	enum MySingleton{
 		INSTANCE;
