@@ -1,5 +1,8 @@
 package strings;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 public class StringSolutions {
 	public int countCode(String str) {
 		if (str == null)
@@ -22,5 +25,29 @@ public class StringSolutions {
 
 	public static void main(String[] args) {
 		System.err.println(new StringSolutions().countCode("cozfxxcope"));
+		System.err.println(new StringSolutions().compress("ccozfxxcope"));
+		System.err.println(new StringSolutions().checkIfUniqueChars("cozfxpe"));
+	}
+	
+	public String compress(String input){
+		if(input == null || input.equals(""))
+			return input;
+		int cnt = 1;
+		StringBuilder bd = new StringBuilder();
+		for(int i = 1 ; i < input.length() ; i++ ){
+			if(input.charAt(i)==input.charAt(i-1))
+				cnt ++;
+			else{
+				bd.append(input.charAt(i-1)+""+cnt);
+				cnt = 1;
+			}
+		}
+		return bd.toString();
+	}
+	
+	public boolean checkIfUniqueChars(String input){
+		if(input == null)
+			return true;
+		return input.length() == input.chars().distinct().count();
 	}
 }
