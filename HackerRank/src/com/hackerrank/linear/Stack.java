@@ -19,6 +19,8 @@ public class Stack<T> {
 		arr.add(item);
 	}
 	public T pop(){
+		if(arr.size() == 0)
+			return null;
 		return arr.remove(arr.size()-1);
 	}
 	public T peek(){
