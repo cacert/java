@@ -2,6 +2,8 @@ package com.hackerrank;
 
 import java.util.HashSet;
 
+import com.hackerrank.linear.Stack;
+
 /**
  * @author kasimsert
  *
@@ -14,7 +16,23 @@ import java.util.HashSet;
  */
 public class LinkedListsTest {
 	public static void main(String[] args) {
-		new LinkedListsTest();
+		LinkedListsTest listsTest = new LinkedListsTest();
+		LinkedListNode a = listsTest.new LinkedListNode();
+		a.data = "a";
+		LinkedListNode b = listsTest.new LinkedListNode();
+		b.data = "b";
+		LinkedListNode c = listsTest.new LinkedListNode();
+		c.data = "c";
+		LinkedListNode d = listsTest.new LinkedListNode();
+		d.data = "d";
+		
+		a.next = b;
+		b.next = c;
+		c.next= d;
+		//d.next = a;
+		//System.err.println(listsTest.checkIfCycyleExists(a));
+		//listsTest.reverseUsingStack(a);
+		listsTest.reverseInplace(a);
 	}
 	
 	private LinkedListNode addLists(LinkedListNode n1, LinkedListNode n2,int carry){
@@ -90,8 +108,72 @@ public class LinkedListsTest {
 		return p2;
 		
 	}
-	private class LinkedListNode{
+	class LinkedListNode{
 		LinkedListNode next ;
 		String data;
+	}
+	
+	private boolean checkIfCycyleExists(LinkedListNode head){
+		if(head == null)
+			return false;
+		LinkedListNode runner1 = head;
+		LinkedListNode runner2 = head;
+		while(runner1 != null && runner1.next != null){
+			runner1= runner1.next.next;
+			runner2 = runner2.next;
+			if(runner1==runner2)
+				return true;
+		}
+		return false;
+	}
+	private void reverseInplace(LinkedListNode head){
+		if(head == null)
+			return;
+		LinkedListNode prev =null ; 
+		LinkedListNode current = head;
+		LinkedListNode next = null ;
+		while (current != null){
+			next = current.next;
+			current.next = prev;
+			
+			prev = current;
+			current = next ;
+		}
+		LinkedListNode runner = prev;
+		while(runner != null){
+			System.err.println(runner.data);
+			runner = runner.next;
+		}
+	}
+	private void reverseUsingStack(LinkedListNode head){
+		if(head == null)
+			return;
+		//print first
+		LinkedListNode runner = head;
+		while(runner != null){
+			System.err.println(runner.data);
+			runner = runner.next;
+		}
+		
+		Stack<LinkedListNode> stack = new Stack<>();
+		runner = head;
+		while(runner != null){
+			stack.push(runner);
+			runner  = runner.next;
+		}
+		runner  = stack.pop();
+		head = runner;
+		while(!stack.isEmpty()){
+			runner.next=stack.pop();
+			runner = runner.next;
+		}
+		runner.next = null;
+		
+		//print last
+		runner = head;
+		while(runner != null){
+			System.err.println(runner.data);
+			runner = runner.next;
+		}
 	}
 }
