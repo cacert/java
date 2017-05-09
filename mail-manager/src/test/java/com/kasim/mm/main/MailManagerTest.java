@@ -4,12 +4,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.derby.jdbc.ClientDataSource;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class MailManager {
-	JdbcTemplate jdbc = null;
+public class MailManagerTest {
+	static JdbcTemplate jdbc = null;
 
-	private void setJDBCTemplate() {
+	@BeforeClass
+	public static  void setJDBCTemplate() {
 		ClientDataSource ds = new org.apache.derby.jdbc.ClientDataSource();
 		ds.setPortNumber(1527);
 		ds.setServerName("localhost");
@@ -19,16 +22,12 @@ public class MailManager {
 		jdbc = new JdbcTemplate(ds);
 	}
 
-	private void test() {
+	@Test
+	public  void test() {
 		List<Map<String, Object>> queryForList = jdbc.queryForList("select * from Persons");
 		for (Map<String, Object> map : queryForList) {
 			System.out.println(map.values());
 		}
 	}
 
-	public static void main(String[] args) {
-		MailManager manager = new MailManager();
-		manager.setJDBCTemplate();
-		manager.test();
-	}
 }
