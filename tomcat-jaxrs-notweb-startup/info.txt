@@ -2,3 +2,14 @@ servlet version >3 -- No web.xml
 in pom.xml setting warname to "rest"
 applicationpath is necesseay but path can be empty
 servlet and rest can run together(Myservlet)
+
+In tomcat use following otherwise will not work
+
+<dependency>
+    <groupId>org.glassfish.jersey.bundles</groupId>
+    <artifactId>jaxrs-ri</artifactId>
+    <version>2.25.1</version>
+</dependency>
+
+
+
