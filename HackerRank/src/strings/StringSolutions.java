@@ -30,7 +30,8 @@ public class StringSolutions {
 //		System.err.println(new StringSolutions().countCode("cozfxxcope"));
 //		System.err.println(new StringSolutions().compress("ccozfxxcope"));
 //		System.err.println(new StringSolutions().checkIfUniqueChars("cozfxpe"));
-		StringSolutions.findPalindrome();
+//		StringSolutions.findPalindrome();
+		System.err.println(new StringSolutions().gHappy("xxgggxyz"));
 	}
 	
 	public String compress(String input){
@@ -123,5 +124,30 @@ public class StringSolutions {
     	}
     	System.out.println(counter);
     }
+    
+	public boolean gHappy(String str) {
+		if (str.equals(""))
+			return true;
+		boolean result = false;
+		boolean reset = false;
+		for (int i = 0; i < str.length() - 1; i++) {
+			if (str.charAt(i) == 'g') {
+				if (str.charAt(i + 1) == 'g' || reset) {
+					result = true;
+					reset = true;
+					if (str.charAt(i + 1) == 'g')
+						i = i + 1;
+				} else {
+					reset = false;
+					result = false;
+				}
+			}else
+			reset = false;
+			if (str.charAt(i + 1) == 'g')
+				result =false;
+		}
+		return result;
+	}
+
     
 }

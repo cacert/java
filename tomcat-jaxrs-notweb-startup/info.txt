@@ -1,0 +1,4 @@
+servlet version >3 -- No web.xml
+in pom.xml setting warname to "rest"
+applicationpath is necesseay but path can be empty
+servlet and rest can run together(Myservlet)
