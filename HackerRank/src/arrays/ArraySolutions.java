@@ -1,4 +1,5 @@
 package arrays;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -9,16 +10,37 @@ import java.util.Scanner;
 public class ArraySolutions {
 	public static void main(String[] args) {
 		int[] arr = new int[]{1,2,3};
-		System.out.println("arr1"+Arrays.toString(arr));
+		//System.out.println("arr1"+Arrays.toString(arr));
 		int[] arr2 = arr;
-		System.out.println("arr2"+Arrays.toString(arr2));
+		//System.out.println("arr2"+Arrays.toString(arr2));
 		arr[2]= 2;
-		System.out.println("arr2"+Arrays.toString(arr2));
-		System.out.println("arr1"+Arrays.toString(arr));
+		//System.out.println("arr2"+Arrays.toString(arr2));
+		//System.out.println("arr1"+Arrays.toString(arr));
+		 printMinMax(new int[]{256741038,623958417,467905213,714532089,938071625});
+		
+		
 	}
 	private boolean findAnagramUsingHashTables(String s1, String s2){
 		return false;
 	}
+	
+    public static void printMinMax(int [] arr){
+    	
+        Arrays.sort(arr);
+        long sum = 0;
+        BigInteger bg = new BigInteger("0");
+        
+        System.out.print(bg.add(new BigInteger(String.valueOf(arr[0])))
+        .add(new BigInteger(String.valueOf(arr[1])))
+        .add(new BigInteger(String.valueOf(arr[2])))
+        .add(new BigInteger(String.valueOf(arr[3]))));
+        bg = new BigInteger("0");
+        System.out.print(" "+      bg.add(new BigInteger(String.valueOf(arr[1])))
+        .add(new BigInteger(String.valueOf(arr[2])))
+        .add(new BigInteger(String.valueOf(arr[3])))
+        .add(new BigInteger(String.valueOf(arr[4]))));
+
+    }
 
 }
 
@@ -145,8 +167,9 @@ class FindMissingElement{
 	
 	public static void main(String[] args) {
 		FindMissingElement findMissingElement = new FindMissingElement();
-		findMissingElement.findMissingElement(new int[]{1,2,3,4},new int[]{1,7,3});
-		findMissingElement.longestSum(new int[]{1,2,-1,3,4,10,10,-10,-1});
+//		findMissingElement.findMissingElement(new int[]{1,2,3,4},new int[]{1,7,3});
+//		findMissingElement.longestSum(new int[]{1,2,-1,3,4,10,10,-10,-1});
+		System.err.println(Arrays.toString(findMissingElement.fix34(new int[]{3, 1, 1, 3, 4, 4})));
 	}
 	
 	private void longestSum(int[] arr){
@@ -162,4 +185,34 @@ class FindMissingElement{
 		}
 	}
 	
+	
+	public int[] fix34(int[] nums) {
+		if (nums.length == 0)
+			return new int[0];
+		int[] arr = new int[nums.length];
+		int[] fours = new int[nums.length];
+		for (int i = 0; i < nums.length; i++) {
+			if(fours[i] != 4)
+				arr[i] = nums[i];
+			if (nums[i] == 3) {
+				swapNextFour(i + 1, nums, arr, fours);
+				i++;
+			}
+		}
+		return arr;
+	}
+
+	public void swapNextFour(int index, int[] nums, int[] arr, int[] fours) {
+		for (int i = 0; i < arr.length; i++) {
+			if (nums[i] == 4 && fours[i] != 4) {
+				fours[i] = 4;
+				if(arr[index]!=0)
+					arr[i] = arr[index];
+				else 
+					arr[i] = nums[index];
+				arr[index] = 4;
+				break;
+			}
+		}
+	}
 }

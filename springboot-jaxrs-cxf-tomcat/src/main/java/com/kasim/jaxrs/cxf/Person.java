@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.kasim.jaxrs.cxf;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
