@@ -1,11 +1,8 @@
 package com.example.restservice;
 
 import org.apache.cxf.bus.spring.SpringBus;
-import org.apache.cxf.endpoint.Server;
-import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 
 @Configuration
 public class JaxrsConfig {
@@ -14,14 +11,23 @@ public class JaxrsConfig {
 		return new SpringBus();
 	}
 
-	@Bean(destroyMethod = "destroy")
-	@DependsOn("cxf")
-	public Server jaxRsServer() {
-		final JAXRSServerFactoryBean factory = new JAXRSServerFactoryBean();
-		factory.setResourceClasses(new Class[] { Service1.class });
-		factory.setBus(cxf());
-		factory.setAddress("/rest1");
-		return factory.create();
+//	@Bean(destroyMethod = "destroy")
+//	@DependsOn("cxf")
+//	public Server jaxRsServer() {
+//		final JAXRSServerFactoryBean factory = new JAXRSServerFactoryBean();
+//		factory.setResourceClasses(new Class[] { Service1.class });
+//		factory.setBus(cxf());
+//		factory.setAddress("/rest1");
+//		return factory.create();
+//	}
+	@Bean
+	public RestRouteBuilder restBuilder() {
+		return new RestRouteBuilder();
+	}
+	
+	@Bean
+	public MyResponse response() {
+		return new MyResponse();
 	}
 
 }

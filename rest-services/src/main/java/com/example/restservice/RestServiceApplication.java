@@ -13,7 +13,6 @@ public class RestServiceApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-
 		System.err.println("kasim");
 	}
 }
